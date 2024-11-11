@@ -14,7 +14,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class UserService {
@@ -30,7 +32,7 @@ public class UserService {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("username", user.getUsername());
-        values.put("password", md5Hash( user.getPassword()));
+        values.put("password", md5Hash(user.getPassword()));
         values.put("firstname", user.getFirstname());
         values.put("lastname", user.getLastname());
         values.put("adress", user.getAdress());
@@ -49,7 +51,6 @@ public class UserService {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("username", user.getUsername());
-        values.put("password", user.getPassword());
         values.put("firstname", user.getFirstname());
         values.put("lastname", user.getLastname());
         values.put("adress", user.getAdress());
@@ -116,15 +117,15 @@ public class UserService {
             for (byte b : digest) {
                 sb.append(String.format("%02x", b));
             }
-            Log.d("Tag is password","password");
+            Log.d("Tag is password", "password");
 
-            Log.d("Tag is password","password");
-            Log.d("Tag is password","password");
-            Log.d("Tag is password","password");
-            Log.d("Tag is password","password");
+            Log.d("Tag is password", "password");
+            Log.d("Tag is password", "password");
+            Log.d("Tag is password", "password");
+            Log.d("Tag is password", "password");
 
             Log.d("md5Hash", sb.toString());
-            Log.d("this is password","password");
+            Log.d("this is password", "password");
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -132,6 +133,7 @@ public class UserService {
         }
 
     }
+
     public User getUserByUsernameAndPassword(String username, String hashedPassword) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(DatabaseHelper.TABLE_USER,  // Table name
@@ -198,7 +200,7 @@ public class UserService {
         String hashedPassword = md5Hash(password);
         // Check if the user exists in the database with this hashed password
         User user = getUserByUsernameAndPassword(username, hashedPassword);
-        Log.d("USER",user.toString());
+        Log.d("USER", user.toString());
         return user;
     }
 
@@ -229,6 +231,46 @@ public class UserService {
         }
     }
 
+    @SuppressLint("Range")
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
+        // Exclude the 'image' column from this query
+        Cursor cursor = db.query("User", new String[]{"id", "username", "firstname", "lastname", "adress", "birthdate", "email"}, null, null, null, null, null);
 
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                User user = new User();
+                user.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                user.setUsername(cursor.getString(cursor.getColumnIndex("username")));
+                user.setFirstname(cursor.getString(cursor.getColumnIndex("firstname")));
+                user.setLastname(cursor.getString(cursor.getColumnIndex("lastname")));
+                user.setAdress(cursor.getString(cursor.getColumnIndex("adress")));
+                user.setEmail(cursor.getString(cursor.getColumnIndex("email")));
+
+                String birthdateString = cursor.getString(cursor.getColumnIndex("birthdate"));
+                user.setBirthdate(stringToDate(birthdateString));
+
+                // Add user to the list without the image
+                userList.add(user);
+            }
+            cursor.close();
+        }
+        db.close();
+        return userList;
+    }
+
+    @SuppressLint("Range")
+    public byte[] getUsereImage(int userIde) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query("User", new String[]{"image"}, "id=?", new String[]{String.valueOf(userIde)}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            byte[] image = cursor.getBlob(cursor.getColumnIndex("image"));
+            cursor.close();
+            return image;
+        }
+        return null;
+    }
 }
