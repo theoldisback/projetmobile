@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Projetmobile" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="YourCustomTheme" parent="Theme.AppCompat">
+        <!-- Your custom theme attributes -->
+    </style>
+</resources>
