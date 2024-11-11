@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/login_bk"
+    android:name=".View.Userview.EditprofileActivity"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        android:orientation="vertical"
+
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/loginHeader"
+            android:text="Update profile"
+            android:layout_marginTop="200px"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputName"
+            style="@style/parent"
+            android:layout_marginTop="100px">
+
+            <EditText
+                android:id="@+id/usernameEditprofile"
+                style="@style/modifiedEditText"
+                android:hint="Username"
+                android:inputType="text"
+                android:textColor="#000000"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/firstnameEditTexte"
+            style="@style/parent"
+            android:layout_marginTop="@dimen/loginViewsMargin">
+
+            <EditText
+                android:id="@+id/firstnameEditprofile"
+                style="@style/modifiedEditText"
+                android:hint="First name"
+                android:inputType="text"
+                android:textColor="#000000"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lastnameEditTexte"
+            style="@style/parent"
+            android:layout_marginTop="@dimen/loginViewsMargin">
+
+            <EditText
+                android:id="@+id/lastnameEditprofile"
+                style="@style/modifiedEditText"
+                android:hint="Lastname"
+                android:inputType="text"
+                android:textColor="#000000"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/addressEditTexte"
+            style="@style/parent"
+            android:layout_marginTop="@dimen/loginViewsMargin">
+
+            <EditText
+                android:id="@+id/addressEditprofile"
+                style="@style/modifiedEditText"
+                android:hint="address"
+                android:textColor="#000000"
+                android:inputType="text"
+                android:maxLines="2" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTextEmaile"
+            style="@style/parent"
+            android:layout_marginTop="@dimen/loginViewsMargin">
+
+            <EditText
+                android:id="@+id/emailEditprofile"
+                style="@style/modifiedEditText"
+                android:hint="email"
+                android:inputType="textEmailAddress"
+                android:textColor="#000000"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputPassword"
+            style="@style/parent"
+            android:layout_marginTop="@dimen/loginViewsMargin">
+
+            <DatePicker
+                android:id="@+id/date_pickerEditprofile"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:endYear="2100"
+                android:textColor="#000000"
+                android:startYear="1900" >
+            </DatePicker>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+        <Button
+            android:id="@+id/EditprofileButton"
+
+            style="@style/loginButton"
+            android:text="edit profile"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/loginViewsMargin"/>
+
+
+
+    </LinearLayout>
+
+</ScrollView>
