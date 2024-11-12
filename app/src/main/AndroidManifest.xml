@@ -19,6 +19,19 @@
         android:largeHeap="true"
         tools:targetApi="31">
 
+
+        <activity
+            android:name=".View.Userview.MainFrontActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".View.Userview.LoginActivity"
             android:exported="true"
