@@ -15,7 +15,7 @@ public class User
     private Date birthdate;
     private String email;
     private byte[] image;  // This will hold the image data as a byte array
-
+    private String role;
     public User() {
     }
 
@@ -101,6 +101,14 @@ public class User
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override

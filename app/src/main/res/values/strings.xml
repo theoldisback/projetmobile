@@ -28,4 +28,10 @@
     <string name="email">Email</string>
     <string name="axxxxxxa_gmail_com">axxxxxxa@gmail.com</string>
     <string name="social_media">Social Media</string>
+
+    <string-array name="spinner_items">
+        <item>Admin</item>
+        <item>Transportor</item>
+        <item>User</item>
+    </string-array>
 </resources>

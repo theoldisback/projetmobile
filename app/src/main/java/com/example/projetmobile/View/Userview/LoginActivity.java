@@ -47,11 +47,25 @@ public class LoginActivity extends AppCompatActivity {
                     User user = userService.loginUser(username, password);
 
                     saveUserSession(user);
-                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-                    startActivity(intent);
-                    // Finish SignUpActivity so user can't go back to it by pressing back button
-                    finish();
-                    return;
+
+                    if(user.getRole().equals("Admin"))
+                    {
+                        Intent intent = new Intent(LoginActivity.this, DashboarduserActivity.class);
+                        startActivity(intent);
+                        // Finish SignUpActivity so user can't go back to it by pressing back button
+                        finish();
+                        return;
+
+                    }
+                    else
+                    {
+                        Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                        startActivity(intent);
+                        // Finish SignUpActivity so user can't go back to it by pressing back button
+                        finish();
+                        return;
+                    }
+
                 } else {
                     // Login failed
                     Toast.makeText(LoginActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
@@ -73,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("ADDRESS", user.getAdress());
         editor.putString("EMAIL", user.getEmail());
         editor.putString("DATE",user.getBirthdate().toString());
+        editor.putString("ROLE",user.getRole());
 
         editor.apply(); // Save changes
     }

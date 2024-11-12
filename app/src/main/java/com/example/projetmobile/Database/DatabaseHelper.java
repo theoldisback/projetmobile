@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "AppDatabase.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
 
     // User Table
     public static final String TABLE_USER = "User";
@@ -19,6 +19,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_USER_ADDRESS = "adress";
     public static final String COLUMN_USER_BIRTHDATE = "birthdate";
     public static final String COLUMN_USER_EMAIL = "email";
+    public static final String COLUMN_USER_ROLE = "role";
+
     public static final String COLUMN_USER_IMAGE = "image";  // New column for image
 
     // SQL statement to create the User table
@@ -31,6 +33,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_USER_ADDRESS + " TEXT, "
             + COLUMN_USER_BIRTHDATE + " TEXT, "
             + COLUMN_USER_EMAIL + " TEXT UNIQUE, "
+            + COLUMN_USER_ROLE + " TEXT DEFAULT 'User', "  // Set default value for 'role' column
+
             + COLUMN_USER_IMAGE + " BLOB)";
 
     public DatabaseHelper(Context context) {

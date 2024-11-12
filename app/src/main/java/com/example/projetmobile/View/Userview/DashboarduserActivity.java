@@ -1,6 +1,7 @@
 package com.example.projetmobile.View.Userview;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,7 +32,6 @@ public class DashboarduserActivity extends AppCompatActivity {
         userList = new ArrayList<>();
         UserService u = new UserService(this);
         userList = u.getAllUsers();
-
         userAdapter = new UserAdapter(userList, this);
         userRecyclerView.setAdapter(userAdapter);
     }

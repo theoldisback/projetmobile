@@ -2,6 +2,8 @@ package com.example.projetmobile.View.Userview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,14 +47,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = userList.get(position);
+        UserService userService = new UserService(context);
+        int userId = user.getId();
         holder.id=user.getId();
+
         holder.userName.setText(user.getUsername());
         holder.userEmail.setText(user.getEmail());
         holder.userfirstname.setText(user.getFirstname());
         holder.userlastname.setText(user.getLastname());
         holder.useradress.setText(user.getAdress());
         holder.userbirthday.setText(user.getBirthdate().toString());
+        byte[] imageBytes = userService.getUserImage(holder.id);
 
+        Bitmap userImage = byteArrayToBitmap(imageBytes);
+        holder.userImage.setImageBitmap(userImage);
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +77,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             @Override
             public void onClick(View view) {
                 // Start a new activity
-                Intent intent = new Intent(context, EditprofileActivity.class);
+                Intent intent = new Intent(context, UpdateprofiledashboardActivity.class);
+                intent.putExtra("USER_ID", holder.id); // 'USER_ID' is the key you can use to retrieve the id later
+
+                context.startActivity(intent);
 
             }
         });
@@ -91,10 +102,35 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             userbirthday = itemView.findViewById(R.id.oneuserbirthday);
             editButton = itemView.findViewById(R.id.editimagebuttonforoneuser);
             deleteButton = itemView.findViewById(R.id.deleteimagebutton);
-
+            userImage = itemView.findViewById(R.id.imageviewuser);
 
 
         }
     }
+    public Bitmap byteArrayToBitmap(byte[] imageBytes) {
+        if (imageBytes != null) {
+            return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        }
+        return null;
+    }
 
+
+    public Bitmap resizeImage(Bitmap originalImage, int maxWidth, int maxHeight) {
+        int width = originalImage.getWidth();
+        int height = originalImage.getHeight();
+
+        float ratioBitmap = (float) width / (float) height;
+        float ratioMax = (float) maxWidth / (float) maxHeight;
+
+        int finalWidth = maxWidth;
+        int finalHeight = maxHeight;
+
+        if (ratioMax > ratioBitmap) {
+            finalWidth = (int) (maxHeight * ratioBitmap);
+        } else {
+            finalHeight = (int) (maxWidth / ratioBitmap);
+        }
+
+        return Bitmap.createScaledBitmap(originalImage, finalWidth, finalHeight, true);
+    }
 }

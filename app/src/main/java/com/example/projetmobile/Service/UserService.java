@@ -61,6 +61,17 @@ public class UserService {
         db.close();
     }
 
+
+    public void updateUserrole(User user) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("role", user.getRole());
+
+        db.update("User", values, "id = ?", new String[]{String.valueOf(user.getId())});
+        db.close();
+    }
+
     // Delete User
     public void deleteUser(int id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -84,6 +95,8 @@ public class UserService {
             user.setAdress(cursor.getString(cursor.getColumnIndex("adress")));
             user.setBirthdate(stringToDate(cursor.getString(cursor.getColumnIndex("birthdate"))));
             user.setEmail(cursor.getString(cursor.getColumnIndex("email")));
+            user.setRole(cursor.getString(cursor.getColumnIndex("role")));
+
             cursor.close();
             return user;
         }
@@ -154,6 +167,7 @@ public class UserService {
             int adressIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_USER_ADDRESS);
             int birthdateIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_USER_BIRTHDATE);
             int emailIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_USER_EMAIL);
+            int roleIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_USER_ROLE);
 
             // Populate user fields from cursor data
             if (idIndex != -1) {
@@ -173,6 +187,9 @@ public class UserService {
             }
             if (adressIndex != -1) {
                 user.setAdress(cursor.getString(adressIndex)); // Assuming 'adress' is a String
+            }
+            if (roleIndex != -1) {
+                user.setRole(cursor.getString(roleIndex)); // Assuming 'adress' is a String
             }
             if (birthdateIndex != -1) {
                 // Convert birthdate from String to Date (assuming birthdate is stored as a String in database)
@@ -237,7 +254,7 @@ public class UserService {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         // Exclude the 'image' column from this query
-        Cursor cursor = db.query("User", new String[]{"id", "username", "firstname", "lastname", "adress", "birthdate", "email"}, null, null, null, null, null);
+        Cursor cursor = db.query("User", new String[]{"id", "username", "firstname", "lastname", "adress", "birthdate", "email","role"}, null, null, null, null, null);
 
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -251,6 +268,7 @@ public class UserService {
 
                 String birthdateString = cursor.getString(cursor.getColumnIndex("birthdate"));
                 user.setBirthdate(stringToDate(birthdateString));
+                user.setRole(cursor.getString(cursor.getColumnIndex("role")));
 
                 // Add user to the list without the image
                 userList.add(user);
