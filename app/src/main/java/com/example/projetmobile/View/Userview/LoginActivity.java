@@ -45,10 +45,17 @@ public class LoginActivity extends AppCompatActivity {
                     User user = userService.loginUser(username, password);
 
                     saveUserSession(user);
+                    String subject = "Welcome " + user.getFirstname() + " " + user.getLastname();
+                    String body = "Dear " + user.getFirstname() + ",\n\n" +
+                            "Your profile has been successfully Logged In.\n" +
+                            "Thank you for joining our platform Again!\n\n" +
+                            "Best regards,\nYour Best App TikTak";
 
+                    // Send the email to the user's email address
+                    new EmailSender("mohamedabdelkebir15@gmail.com", subject, body).execute();
                     if(user.getRole().equals("Admin"))
                     {
-                        Intent intent = new Intent(LoginActivity.this, DashboarduserFragment.class);
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         // Finish SignUpActivity so user can't go back to it by pressing back button
                         finish();
@@ -57,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, ProfilerFragment.class);
                         startActivity(intent);
                         // Finish SignUpActivity so user can't go back to it by pressing back button
                         finish();

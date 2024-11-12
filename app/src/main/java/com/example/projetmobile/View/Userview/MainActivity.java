@@ -57,14 +57,15 @@ public class MainActivity  extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_home) {
+            Log.d("FragmentTransaction", "Replacing with DashboarduserFragment");
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, new HomeFragment())
+                    .replace(R.id.content_frame, new DashboarduserFragment())
                     .commit();
         }
         if (item.getItemId() == R.id.nav_profile) {
             Log.d("FragmentTransaction", "Replacing with DashboarduserFragment");
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, new DashboarduserFragment())
+                    .replace(R.id.content_frame, new ProfilerFragment())
                     .commit();
         }
         drawerLayout.closeDrawer(GravityCompat.START);

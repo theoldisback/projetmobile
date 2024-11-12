@@ -46,7 +46,7 @@ android {
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/{AL2.0,LGPL2.1,NOTICE.md,LICENSE.md}"
         }
     }
 }
@@ -77,6 +77,11 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.appcompat:appcompat:1.6.0")
+
+    implementation("com.sun.mail:android-mail:1.6.6")
+    //noinspection GradleDependency
+    implementation("com.sun.mail:android-activation:1.6.6")
+
 
 
 }
