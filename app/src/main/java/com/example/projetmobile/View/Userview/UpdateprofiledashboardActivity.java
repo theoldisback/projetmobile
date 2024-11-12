@@ -68,7 +68,7 @@ Button updatebutton;
                 user.setId(userId);
                 user.setRole(currentrole);
                 userService.updateUserrole(user);
-                Intent intent = new Intent(UpdateprofiledashboardActivity.this, DashboarduserActivity.class);
+                Intent intent = new Intent(UpdateprofiledashboardActivity.this, DashboarduserFragment.class);
                 startActivity(intent);
             }
         });

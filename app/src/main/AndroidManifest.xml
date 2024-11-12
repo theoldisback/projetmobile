@@ -7,18 +7,34 @@
 
     <application
         android:allowBackup="true"
+        android:enableOnBackInvokedCallback="true"
+
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat"
+        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
         android:largeHeap="true"
         tools:targetApi="31">
 
         <activity
-            android:name=".View.Userview.DashboarduserActivity"
+            android:name=".View.Userview.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+
+        <activity
+            android:name=".View.Userview.DashboarduserFragment"
             android:exported="true"
             android:label="List Users Dashboard"
             android:theme="@style/Theme.MaterialComponents.Light">
@@ -28,6 +44,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
 
 
         <activity

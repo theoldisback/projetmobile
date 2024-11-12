@@ -67,7 +67,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 // Start a new activity
                 UserService u = new UserService(context);
                 u.deleteUser(holder.id);
-                Intent intent = new Intent(context, DashboarduserActivity.class);
+                Intent intent = new Intent(context, DashboarduserFragment.class);
                 context.startActivity(intent);
 
             }

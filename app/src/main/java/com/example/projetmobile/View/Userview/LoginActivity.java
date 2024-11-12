@@ -3,7 +3,6 @@ package com.example.projetmobile.View.Userview;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.projetmobile.MainActivity;
 import com.example.projetmobile.Model.User;
 import com.example.projetmobile.R;
 import com.example.projetmobile.Service.UserService;
@@ -50,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     if(user.getRole().equals("Admin"))
                     {
-                        Intent intent = new Intent(LoginActivity.this, DashboarduserActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, DashboarduserFragment.class);
                         startActivity(intent);
                         // Finish SignUpActivity so user can't go back to it by pressing back button
                         finish();
